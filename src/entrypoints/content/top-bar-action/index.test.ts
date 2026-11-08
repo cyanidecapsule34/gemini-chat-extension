@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { eventBus } from '@/utils/eventbus'
+import tippy from 'tippy.js'
+import { getGeminiTooltip } from '../gemini-tooltip'
 import {
   startChatSettingsTopBarAction,
   startTopBarAction,
@@ -15,6 +17,17 @@ vi.mock('@/utils/eventbus', () => ({
 
 vi.mock('@/utils/i18n', () => ({
   tt: (_key: string, fallback: string) => fallback,
+}))
+
+vi.mock('tippy.js', () => ({
+  default: vi.fn((reference: Element, options: unknown) => ({
+    destroy: vi.fn(),
+    hide: vi.fn(),
+    options,
+    reference,
+    setContent: vi.fn(),
+    setProps: vi.fn(),
+  })),
 }))
 
 const ENTRY_SELECTOR = '[data-test-id="gemini-power-kit-theme-top-bar-container"]'
@@ -75,11 +88,22 @@ describe('Theme top bar action', () => {
     expect(entry?.className).toBe('buttons-container')
     expect(entry?.nextElementSibling).toBe(lastNativeChild)
     expect(button?.getAttribute('aria-label')).toBe('Theme')
-    expect(button?.getAttribute('title')).toBe('Theme')
+    expect(button?.hasAttribute('title')).toBe(false)
     expect(button?.querySelector('svg')?.getAttribute('viewBox')).toBe('0 0 24 24')
+
+    const tooltipCall = vi.mocked(tippy).mock.calls[0]
+    const tooltipOptions = tooltipCall?.[1] as {
+      appendTo?: () => Element
+      content?: string
+      placement?: string
+    } | undefined
+    expect(tooltipOptions?.content).toBe('Theme')
+    expect(tooltipOptions?.placement).toBe('bottom')
+    expect(tooltipOptions?.appendTo?.()).toBe(document.body)
 
     button?.click()
 
+    expect(vi.mocked(tippy).mock.results[0]?.value.hide).toHaveBeenCalledOnce()
     expect(eventBus.emitSync).toHaveBeenCalledWith('theme-floating-panel:open', {
       source: 'top-bar-action',
     })
@@ -102,6 +126,7 @@ describe('Theme top bar action', () => {
 
     chatButton?.click()
 
+    expect(chatButton && getGeminiTooltip(chatButton)?.hide).toHaveBeenCalledOnce()
     expect(eventBus.emitSync).toHaveBeenCalledWith(
       'chat-settings-panel:toggle',
       { source: 'top-bar-action' },
@@ -157,6 +182,10 @@ describe('Theme top bar action', () => {
   it('rebinds and restores the entry when Gemini replaces the right section', async () => {
     startTopBarAction()
 
+    const initialTooltip = vi.mocked(tippy).mock.results[0]?.value as {
+      destroy: ReturnType<typeof vi.fn>
+    } | undefined
+
     const topBar = document.querySelector('top-bar-actions .top-bar-actions')
     const previousRightSection = document.querySelector('.right-section')
     const nextRightSection = document.createElement('div')
@@ -171,6 +200,7 @@ describe('Theme top bar action', () => {
     expect(topBar?.contains(nextRightSection)).toBe(true)
     expect(entry).not.toBeNull()
     expect(entry?.nextElementSibling?.getAttribute('data-native')).toBe('replacement')
+    expect(initialTooltip?.destroy).toHaveBeenCalledTimes(1)
   })
 
   it('repositions the entry when Gemini appends a native action', async () => {
@@ -211,6 +241,9 @@ describe('Theme top bar action', () => {
 
   it('removes resources and cancels pending work when stopped', async () => {
     startTopBarAction()
+    const tooltip = vi.mocked(tippy).mock.results[0]?.value as {
+      destroy: ReturnType<typeof vi.fn>
+    } | undefined
     const rightSection = document.querySelector('.right-section')
     rightSection?.appendChild(document.createElement('div'))
 
@@ -219,6 +252,7 @@ describe('Theme top bar action', () => {
 
     expect(document.querySelector(ENTRY_SELECTOR)).toBeNull()
     expect(document.getElementById('gpk-theme-top-bar-action-style')).toBeNull()
+    expect(tooltip?.destroy).toHaveBeenCalledTimes(1)
 
     rightSection?.appendChild(document.createElement('div'))
     await flushReconcile()

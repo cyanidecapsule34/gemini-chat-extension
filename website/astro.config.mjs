@@ -31,6 +31,7 @@ export default defineConfig({
 			favicon: '/favicon.png',
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/RonkTsang/gemini-chat-extension' },
+				{ icon: 'x.com', label: 'X', href: 'https://x.com/RonkTsang' },
 			],
 			customCss: [
 				'./src/styles/custom.css',
@@ -60,7 +61,7 @@ export default defineConfig({
 					translations: { 'zh-CN': '功能特性' },
 					items: [
 						{ label: 'Chat Outline', translations: { 'zh-CN': '对话大纲' }, slug: 'features/chat-outline' },
-						{ label: 'Quick Follow-up', translations: { 'zh-CN': '快速跟进' }, slug: 'features/quick-follow-up' },
+						{ label: 'Quick Follow-up', translations: { 'zh-CN': '划词追问' }, slug: 'features/quick-follow-up' },
 						{ label: 'Chain Prompt', translations: { 'zh-CN': '链式提示词' }, slug: 'features/chain-prompt' },
 						{ label: 'Open in New Tab', translations: { 'zh-CN': '新标签页打开' }, slug: 'features/stuff-open-new-tab' },
 						{ label: 'Tab Title Sync', translations: { 'zh-CN': '标签页标题同步' }, slug: 'features/tab-title-sync' },
@@ -73,9 +74,29 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Tips & Tutorials',
+					translations: { 'zh-CN': '技巧与教程' },
+					items: [
+						{ label: 'Browse Tutorials', translations: { 'zh-CN': '浏览教程' }, slug: 'tips' },
+						{ label: 'Chat Outline', translations: { 'zh-CN': '对话大纲' }, slug: 'tips/find-earlier-gemini-prompts' },
+						{ label: 'Ask Gemini: Quote & Reply', translations: { 'zh-CN': '如何用 Ask Gemini 划词追问' }, slug: 'tips/ask-follow-up-about-gemini-response' },
+						{ label: 'Get Completion Alerts', translations: { 'zh-CN': '接收回复完成通知' }, slug: 'tips/get-notified-when-gemini-finishes' },
+						{ label: 'Delete Multiple Chats', translations: { 'zh-CN': '批量清理对话' }, slug: 'tips/delete-multiple-gemini-chats' },
+						{
+							label: 'Theme & Background',
+							translations: { 'zh-CN': '主题与背景' },
+							items: [
+								{ label: 'Change Gemini Background', translations: { 'zh-CN': '更换 Gemini 背景' }, slug: 'tips/change-gemini-background' },
+								{ label: 'Make Gemini Chat Wider', translations: { 'zh-CN': '加宽 Gemini 对话' }, slug: 'tips/make-gemini-chat-wider' },
+							],
+						},
+					],
+				},
+				{
 					label: 'Support',
 					translations: { 'zh-CN': '支持' },
 					items: [
+						{ label: 'Get Help', translations: { 'zh-CN': '获取帮助' }, slug: 'support' },
 						{ label: 'FAQ', translations: { 'zh-CN': '常见问题' }, slug: 'support/faq' },
 						{ label: 'Notification Troubleshooting', translations: { 'zh-CN': '通知问题排查' }, slug: 'support/notification-troubleshooting' },
 						{ label: "What's New", translations: { 'zh-CN': '最新动态' }, slug: 'support/whats-new' },

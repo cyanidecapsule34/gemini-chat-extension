@@ -50,11 +50,6 @@
   "responseNotificationMessage": "Ihre Antwort ist bereit.",
   "bulkDelete": {
     "entryLabel": "Massenlöschung",
-    "entryHint": {
-      "title": "Mehrfach löschen",
-      "description": "Tippe, um den Mehrfachauswahlmodus zu aktivieren. Wähle die Chats aus, die du löschen möchtest, und bestätige dann.",
-      "dismiss": "Schließen"
-    },
     "selectRecent": "Letzte $1 auswählen",
     "selectUnpinned": "Die letzten $1 nicht angehefteten Chats auswählen",
     "change": "Ändern",
@@ -76,12 +71,33 @@
   },
   "quickFollow": {
     "more": "Mehr",
-    "moreAriaLabel": "Weitere Prompts anzeigen"
+    "moreAriaLabel": "Weitere Prompts anzeigen",
+    "multiSelection": {
+      "selectedText": "Ausgewählter Text",
+      "userComment": "Nutzerkommentar",
+      "editComment": "Kommentar bearbeiten",
+      "commentPlaceholder": "Kommentar hinzufügen…",
+      "add": "Hinzufügen",
+      "send": "Senden",
+      "addToDraft": "Zum Entwurf hinzufügen",
+      "sendSeparately": "Separat senden",
+      "selectionNumber": "Auswahl $1",
+      "addFailed": "Auswahl konnte nicht hinzugefügt werden",
+      "maxSelections": "Du kannst bis zu 10 Auswahlen hinzufügen",
+      "removeSelection": "Auswahl entfernen",
+      "updateFailed": "Entwurf konnte nicht aktualisiert werden",
+      "sendFailed": "Senden fehlgeschlagen. Dein Entwurf wurde beibehalten.",
+      "sendUnknown": "Der Versandstatus ist unklar. Dein Entwurf wurde beibehalten.",
+      "restoreDraft": "Entwurf wiederherstellen",
+      "restoreFailed": "Entwurf konnte nicht wiederhergestellt werden. Leere das Eingabefeld und versuche es erneut.",
+      "unsupportedDraft": "Dieser Entwurf kann nicht sicher beiseitegelegt werden. Sende oder entferne zuerst Anhänge und formatierte Inhalte."
+    }
   },
   "settings": {
     "quickFollow": {
       "title": "Schnelle Rückfrage",
       "enable": "Schnelle Rückfrage aktivieren",
+      "enableDescription": "Wenn die schnelle Rückfrage aktiviert ist, wird Geminis integrierte Schaltfläche „Fragen“ ausgeblendet. Deaktivieren Sie die Funktion, um sie wieder anzuzeigen.",
       "customPrompts": {
         "title": "Skill-Management",
         "description": "Die ersten $1 Skills sind angeheftet, scrollen Sie horizontal für weitere",
@@ -181,7 +197,15 @@
       "enableBackgroundImage": "Hintergrundbild aktivieren",
       "backgroundImageUpload": "Hintergrundbild hochladen",
       "dropBackground": "Bild hierher ziehen",
-      "fileTypes": "PNG, JPG oder WebP bis zu 5MB",
+      "themeBloom": {
+        "title": "Theme Bloom",
+        "description": "Bild außerhalb des Eingabefelds ablegen, um ein passendes Theme anzuwenden; im Eingabefeld wird es normal hochgeladen.",
+        "analyzing": "Theme wird abgeglichen…",
+        "dropHint": "Zum Anwenden des Themes ablegen",
+        "applyImageFailed": "Bild konnte nicht angewendet werden"
+      },
+      "interactions": "Interaktionen",
+      "fileTypes": "PNG, JPG, WebP und AVIF bis zu 10MB",
       "selectFile": "Datei auswählen",
       "blurIntensity": "Weichzeichnen",
       "backgroundPosition": "Position",
@@ -212,8 +236,9 @@
       "chatTextColor": "Textfarbe der Nachrichten",
       "chatTextColorModeDescription": "Modus: $1",
       "resetChatTextColor": "Zurücksetzen",
-      "invalidFileType": "Nur PNG/JPG/WebP wird unterstützt",
-      "fileTooLarge": "Bildgröße darf maximal 5MB betragen",
+      "invalidFileType": "Nur PNG, JPG, WebP und AVIF werden unterstützt",
+      "fileTooLarge": "Bildgröße darf maximal 10MB betragen",
+      "imageTooLarge": "Bildabmessungen dürfen 40 MP nicht überschreiten",
       "imageLoadFailed": "Laden des Bildes fehlgeschlagen, bitte versuchen Sie es erneut",
       "removeBackgroundImage": "Hintergrundbild entfernen"
     },
@@ -474,6 +499,8 @@
         "toggleBulkDelete": "Massenlöschung umschalten",
         "toggleBulkDeleteDisabledInfo": "Massenlöschung ist aus. Aktiviere sie in den Einstellungen, um diesen Shortcut zu verwenden.",
         "openNewChat": "Neuen Chat öffnen",
+        "deleteCurrentChat": "Aktuellen Chat löschen",
+        "deleteCurrentChatInfo": "Dieser Kurzbefehl öffnet die Löschbestätigung. Drücken Sie Enter, um das Löschen des aktuellen Chats zu bestätigen.",
         "openTemporaryChat": "Temporären Chat öffnen",
         "openLibrary": "Bibliothek öffnen",
         "openGems": "Gems öffnen",
@@ -553,15 +580,40 @@
   "whatsnew": {
     "title": "Was gibt's Neues",
     "releaseNotes": "Versionshinweise",
-    "chatLayout": {
-      "title": "Gemini passt sich dir an",
-      "description": "Passe die Breite von Chat und Eingabe an, damit Gespräche mit Gemini komfortabler, fokussierter und leichter zu verfolgen sind.",
-      "action": "Chatlayout anpassen"
-    },
-    "gemAvatar": {
-      "title": "Gib jedem Gem ein Gesicht",
-      "description": "Lege für jedes Gem ein Avatar fest und mach aus einem Namen eine sichtbare Figur mit eigenem Charakter.",
-      "action": "Erweiterungen öffnen"
+    "multiAsk": {
+      "title": "Multi-Ask für Gemini ist da",
+      "description": "Lies einfach weiter, ohne deine Fragen im Kopf behalten zu müssen. Sammle sie unterwegs und stelle sie zusammen mit dem passenden Kontext.",
+      "action": "Anleitung ansehen"
     }
+  },
+  "onboarding": {
+    "width": {
+      "title": "Lange Antworten leichter lesen",
+      "description": "Passe die Gesprächsbreite an, damit lange Texte und Code mehr Platz haben."
+    },
+    "theme": {
+      "title": "Gemini nach deinem Geschmack",
+      "description": "Wähle Farben und einen Hintergrund, die zu deinem Arbeitsalltag passen."
+    },
+    "bulkDelete": {
+      "title": "Chats schneller aufräumen",
+      "description": "Wähle mehrere nicht mehr benötigte Unterhaltungen aus und lösche sie auf einmal."
+    },
+    "settings": {
+      "title": "Mehr Tools an einem Ort",
+      "description": "Öffne Gemini Power Kit jederzeit, um die passenden Tools und Einstellungen zu finden."
+    },
+    "finish": {
+      "title": "Du bist startklar!",
+      "description": "Passe Gemini an deine Wünsche an. Entdecke hilfreiche Tipps oder hol dir Unterstützung, wenn du sie brauchst.",
+      "guideDescription": "Praktische Tipps für den Einstieg.",
+      "supportDescription": "Hilfe, wann immer du sie brauchst."
+    },
+    "next": "Weiter",
+    "skip": "Überspringen",
+    "guide": "Anleitung ansehen",
+    "support": "Hilfe & Support",
+    "done": "Los geht’s",
+    "progress": "$1 von $2"
   }
 }

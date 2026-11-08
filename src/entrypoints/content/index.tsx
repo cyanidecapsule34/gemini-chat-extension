@@ -14,12 +14,25 @@ import { chatChangeDetector } from '@/services/chatChangeDetector'
 import { urlMonitor } from '@/services/urlMonitor'
 import { tabTitleSync } from '@/services/tabTitleSync'
 import { startResponseCompleteNotificationContentProvider } from '@/services/responseCompleteNotificationContent'
-import { enableBulkDelete, enableGemAvatar } from '@/entrypoints/popup/storage'
+import {
+  enableBulkDelete,
+  enableThemeBloom,
+  enableGemAvatar,
+} from '@/common/storage'
 import { i18nCache } from '@/utils/i18nCache'
 import { stuffPageModule } from './stuff-page'
 import { initTheme, initThemeBackground } from './gemini-theme'
 import { gemAvatarModule } from './gem-avatar'
 import { createGemAvatarSettingsController } from './gem-avatar/settings'
+import {
+  createThemeBloomController,
+  createThemeBloomSettingsController,
+  primeThemeBloomViewTransition,
+} from './theme-bloom'
+import {
+  announceThemeBloomRuntimeDisabled,
+  announceThemeBloomRuntimeReady,
+} from './theme-bloom/runtime'
 import {
   FIREFOX_INSTANCE_ID_ATTR,
   markFirefoxReloadRequired,
@@ -146,10 +159,13 @@ export default defineContentScript({
     stuffPageModule.start()
     console.log('[ContentScript] Stuff Page Module started')
 
-    // Apply persisted theme (or default if none saved)
-    void initTheme().then(() => initThemeBackground())
+    // Apply persisted visuals before priming the real View Transition path.
+    // This keeps the no-op primer from racing background-image initialization.
+    const themeVisualsReady = initTheme()
+      .then(() => initThemeBackground())
 
     // 6. Finally create the UI
+    let cleanupOverlay: (() => void) | undefined
     const ui = createIntegratedUi(ctx, {
       position: 'modal',
       anchor: 'body',
@@ -163,11 +179,38 @@ export default defineContentScript({
         anchor.appendChild(ui)
       },
       onMount: (container) => {
-        renderOverlay(container)
+        cleanupOverlay?.()
+        cleanupOverlay = renderOverlay(container)
+        return cleanupOverlay
+      },
+      onRemove: (cleanup) => {
+        cleanup?.()
+        if (cleanupOverlay === cleanup) cleanupOverlay = undefined
       },
     });
 
     ui.mount();
+    const themeBloom = createThemeBloomController()
+    const themeBloomSettings = createThemeBloomSettingsController({
+      setting: enableThemeBloom,
+      prepare: async (signal) => {
+        await themeVisualsReady
+        if (signal.aborted || !ctx.isValid) {
+          throw new DOMException('Theme Bloom preparation was cancelled', 'AbortError')
+        }
+        await primeThemeBloomViewTransition(document, signal)
+      },
+      enable: () => {
+        if (!ctx.isValid) return
+        themeBloom.start()
+        announceThemeBloomRuntimeReady(window)
+      },
+      disable: () => {
+        announceThemeBloomRuntimeDisabled(window)
+        themeBloom.stop()
+      },
+    })
+    void themeBloomSettings.start()
     const bulkDeleteSettings = createBulkDeleteSettingsController({
       setting: enableBulkDelete,
       start: startBulkDelete,
@@ -186,6 +229,9 @@ export default defineContentScript({
     const topBarCustomization = createTopBarCustomizationController()
     await topBarCustomization.start()
     ctx.onInvalidated(() => {
+      cleanupOverlay?.()
+      cleanupOverlay = undefined
+      stuffPageModule.stop()
       if (import.meta.env.DEV) {
         window.removeEventListener(
           GEM_DEV_EVENTS.DEV_BULK_DELETE_FORCE_FAILURE_CHANGE,
@@ -194,6 +240,7 @@ export default defineContentScript({
       }
       bulkDeleteSettings.stop()
       gemAvatarSettings.stop()
+      themeBloomSettings.stop()
       stopPowerKitEntry()
       chatSettings.stop()
       topBarCustomization.stop()

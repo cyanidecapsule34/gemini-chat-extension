@@ -4,6 +4,7 @@ import {
   applyChatSettingsStyles,
   clearChatSettingsStyles,
 } from './styleController'
+import { INPUT_AREA_V2_SELECTOR } from './selectors'
 
 const CHAT_SETTINGS_SCOPE =
   'chat-window:not(.preview-chat-window):not(.in-gems-mode)'
@@ -11,6 +12,7 @@ const CHAT_SETTINGS_SCOPE =
 describe('Chat layout style controller', () => {
   afterEach(() => {
     clearChatSettingsStyles()
+    document.body.replaceChildren()
   })
 
   it('applies independent chat and input widths', () => {
@@ -33,7 +35,19 @@ describe('Chat layout style controller', () => {
       `:root[data-gpk-chat-width] ${CHAT_SETTINGS_SCOPE} infinite-scroller > div.conversation-container user-query {\n  max-width: 100% !important;\n}`,
     )
     expect(css).toContain(
+      `${CHAT_SETTINGS_SCOPE} infinite-scroller > div.conversation-container model-response .response-container-header`,
+    )
+    expect(css).toContain(
+      `${CHAT_SETTINGS_SCOPE} infinite-scroller > div.conversation-container model-response message-content > .markdown > *`,
+    )
+    expect(css).toContain(
+      `${CHAT_SETTINGS_SCOPE} infinite-scroller > div.conversation-container model-response .response-container-footer`,
+    )
+    expect(css).toContain(
       `:root[data-gpk-input-width] ${CHAT_SETTINGS_SCOPE} input-container > fieldset {`,
+    )
+    expect(css).toContain(
+      `:root[data-gpk-input-width] ${CHAT_SETTINGS_SCOPE} input-container > div.input-area-container > input-area-v2 {\n  box-sizing: border-box !important;\n  width: min(var(--gpk-input-width), 100%) !important;\n}`,
     )
   })
 
@@ -57,6 +71,32 @@ describe('Chat layout style controller', () => {
       .toBe(false)
     expect(document.documentElement.hasAttribute('data-gpk-input-width'))
       .toBe(false)
+  })
+
+  it('targets the current Gemini prompt surface outside Gem previews', () => {
+    document.body.innerHTML = `
+      <chat-window>
+        <input-container>
+          <div class="input-area-container">
+            <input-area-v2><div class="input-area"><fieldset></fieldset></div></input-area-v2>
+          </div>
+        </input-container>
+      </chat-window>
+      <chat-window class="preview-chat-window">
+        <input-container>
+          <div class="input-area-container">
+            <input-area-v2><div class="input-area"><fieldset></fieldset></div></input-area-v2>
+          </div>
+        </input-container>
+      </chat-window>
+    `
+
+    expect(
+      document.querySelectorAll(`${CHAT_SETTINGS_SCOPE} ${INPUT_AREA_V2_SELECTOR}`),
+    ).toHaveLength(1)
+    expect(
+      document.querySelectorAll(`${CHAT_SETTINGS_SCOPE} input-container > fieldset`),
+    ).toHaveLength(0)
   })
 
   it('scopes alignment, full-width, and table compatibility rules', () => {

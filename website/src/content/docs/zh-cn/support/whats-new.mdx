@@ -4,6 +4,7 @@ description: 查看 Gemini Power Kit 的最新版本、功能更新和视觉改�
 ---
 
 import { Image } from 'astro:assets';
+import multiAskPromo from '../../../../assets/releases/whats-new/v0.13.0-multi-ask.webp';
 import bulkDeleteEntry from '../../../../assets/features/bulk-delete/entry.jpeg';
 import bulkDeleteSelection from '../../../../assets/features/bulk-delete/selection-panel.jpeg';
 import shortcutSettings from '../../../../assets/features/Shortcut/shortcut_setting.png';
@@ -19,6 +20,48 @@ import chatLayoutImg from '../../../../assets/features/chat-layout.png';
 import gemAvatarShowcase from '../../../../assets/features/gem-avatar/showcase.png';
 
 查看最新版本、改进和修复。
+
+## v0.13.0 边读边记，一起追问
+
+*2026 年 10 月 31 日*
+
+<Image src={multiAskPromo} alt="Multi-Ask 宣传图，展示两段带编号的高亮文字和评论框" class="release-image" />
+
+*Multi-Ask 让每个问题都有对应的原文。*
+
+读 Gemini 的长回答时，有疑问就记在那句话旁边，再接着读。**Multi-Ask 划词追问**把问题和原文放在一起，准备好后一次发送，不用记住所有疑问，也不用回头找原文。
+
+[了解如何引用 Gemini 回答并继续追问 →](/zh-cn/tips/ask-follow-up-about-gemini-response/)
+
+## v0.12.1–v0.12.7 改进与修复
+
+*2026 年 9–10 月*
+
+- 恢复新版 Gemini Library 中的**在新标签页打开**功能。
+- 改进对话宽度、主题、侧栏快捷键和 Spark 对话的兼容性。
+- 修复置顶聊天删除问题，优化批量删除入口样式。
+
+## v0.12.0 更好玩、更可靠的 Gemini
+
+*2026 年 8 月 16 日*
+
+让 Gemini 工作空间更有个性，常用操作更顺手，日常导航也更稳定。
+
+### Theme Bloom
+
+将电脑中的一张支持图片拖到 Gemini 页面上输入框以外的任意位置，即可把它设为壁纸，并自动应用最接近的颜色预设。新主题会从拖放位置向外扩散。拖到输入框内的图片仍由 Gemini 原生上传流程处理。
+
+Theme Bloom 默认开启，支持单张 PNG、JPG、WebP 或 AVIF 图片，大小不超过 10 MB、尺寸不超过 40 MP。完整流程和控制项请查看 [Theme 使用指南](/zh-cn/features/theme/#theme-bloom)。
+
+### 删除当前聊天快捷键
+
+快捷键设置新增 **Delete Current Chat（删除当前聊天）**。如有需要，可在 **Tools（工具）** → **Shortcut（快捷键）** 中自行分配组合键；它默认不设置快捷键，以避免误删。触发后会打开 Gemini 原生删除流程，你仍需检查并确认操作。
+
+### 改进与修复
+
+- 恢复 Gemini **Recents（最近记录）** 侧栏中的 Bulk Delete 入口。
+- 提升 **New Chat（新聊天）** 导航的稳定性。
+- 优化 Theme 控制项和顶栏工具提示，使界面更清晰一致。
 
 ## v0.11.0 更贴合你的 Gemini 工作空间
 

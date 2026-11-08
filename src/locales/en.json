@@ -50,11 +50,6 @@
   "responseNotificationMessage": "Your response is ready.",
   "bulkDelete": {
     "entryLabel": "Bulk delete",
-    "entryHint": {
-      "title": "Bulk Delete",
-      "description": "Click to enter multi-select mode. Select the chats you want to delete, then confirm.",
-      "dismiss": "Dismiss"
-    },
     "selectRecent": "Select $1 recent",
     "selectUnpinned": "Select $1 unpinned",
     "change": "Change",
@@ -76,12 +71,33 @@
   },
   "quickFollow": {
     "more": "More",
-    "moreAriaLabel": "Show more prompts"
+    "moreAriaLabel": "Show more prompts",
+    "multiSelection": {
+      "selectedText": "Selected text",
+      "userComment": "User comment",
+      "editComment": "Edit comment",
+      "commentPlaceholder": "Add a comment…",
+      "add": "Add",
+      "send": "Send",
+      "addToDraft": "Add to draft",
+      "sendSeparately": "Send separately",
+      "selectionNumber": "Selection $1",
+      "addFailed": "Couldn’t add this selection",
+      "maxSelections": "You can add up to 10 selections",
+      "removeSelection": "Remove selection",
+      "updateFailed": "Couldn’t update this draft",
+      "sendFailed": "Couldn’t send. Your draft has been kept.",
+      "sendUnknown": "Submission could not be confirmed. Your draft has been kept.",
+      "restoreDraft": "Restore draft",
+      "restoreFailed": "Couldn’t restore the draft. Clear the input and try again.",
+      "unsupportedDraft": "This draft cannot be safely set aside. Send or remove attachments and formatted content first."
+    }
   },
   "settings": {
     "quickFollow": {
       "title": "Quick Follow-up",
       "enable": "Enable Quick Follow-up",
+      "enableDescription": "When enabled, Quick Follow-up hides Gemini’s built-in Ask button. Turn it off to show the button again.",
       "customPrompts": {
         "title": "Skill Management",
         "description": "The first $1 skills are pinned, scroll horizontally to view more",
@@ -181,7 +197,15 @@
       "enableBackgroundImage": "Enable wallpaper",
       "backgroundImageUpload": "Background Image Upload",
       "dropBackground": "Drop your image here",
-      "fileTypes": "PNG, JPG or WebP up to 5MB",
+      "themeBloom": {
+        "title": "Theme Bloom",
+        "description": "Drop an image outside Gemini's prompt box to apply a matching theme; drop it inside to upload normally.",
+        "analyzing": "Matching your theme…",
+        "dropHint": "Drop to apply theme",
+        "applyImageFailed": "Could not apply the image"
+      },
+      "interactions": "Interactions",
+      "fileTypes": "PNG, JPG, WebP, and AVIF up to 10MB",
       "selectFile": "Select File",
       "blurIntensity": "Blur",
       "backgroundPosition": "Position",
@@ -212,8 +236,9 @@
       "chatTextColor": "Message text color",
       "chatTextColorModeDescription": "Mode: $1",
       "resetChatTextColor": "Reset",
-      "invalidFileType": "Only PNG/JPG/WebP is supported",
-      "fileTooLarge": "Image size must be 5MB or less",
+      "invalidFileType": "Only PNG, JPG, WebP, and AVIF are supported",
+      "fileTooLarge": "Image size must be 10MB or less",
+      "imageTooLarge": "Image dimensions must not exceed 40MP",
       "imageLoadFailed": "Image loading failed, please try again",
       "removeBackgroundImage": "Remove Background Image"
     },
@@ -470,6 +495,8 @@
         "toggleBulkDelete": "Toggle Bulk Delete",
         "toggleBulkDeleteDisabledInfo": "Bulk Delete is off. Turn it on in Settings to use this shortcut.",
         "openNewChat": "Open New Chat",
+        "deleteCurrentChat": "Delete Current Chat",
+        "deleteCurrentChatInfo": "This shortcut opens the delete confirmation. Press Enter to confirm deleting the current chat.",
         "openTemporaryChat": "Open Temporary Chat",
         "openLibrary": "Open Library",
         "openGems": "Open Gems",
@@ -549,15 +576,40 @@
   "whatsnew": {
     "title": "What's New",
     "releaseNotes": "Release notes",
-    "chatLayout": {
-      "title": "Make Gemini fit your flow",
-      "description": "Set your chat and input widths to make Gemini conversations feel more comfortable, focused, and easier to follow.",
-      "action": "Adjust chat layout"
-    },
-    "gemAvatar": {
-      "title": "Give Gems a face",
-      "description": "Set an avatar for each Gem and turn a name into a visible character with its own personality.",
-      "action": "Open Enhancements"
+    "multiAsk": {
+      "title": "Multi-Ask for Gemini Is Here",
+      "description": "Keep reading without forgetting what you wanted to ask. Capture questions along the way, then ask them together with the right context.",
+      "action": "View Usage Guide"
     }
+  },
+  "onboarding": {
+    "width": {
+      "title": "Make long answers easier to read",
+      "description": "Adjust the conversation width to give long text and code the space you need."
+    },
+    "theme": {
+      "title": "Make Gemini feel like yours",
+      "description": "Choose colors and a background that make your everyday workspace feel right."
+    },
+    "bulkDelete": {
+      "title": "Tidy up chats faster",
+      "description": "Select multiple conversations you no longer need and save time clearing them out."
+    },
+    "settings": {
+      "title": "More tools, all in one place",
+      "description": "Open Gemini Power Kit anytime to find the tools and settings you need."
+    },
+    "finish": {
+      "title": "You’re all set!",
+      "description": "Make Gemini work your way. Explore a few tips, or get a hand whenever you need it.",
+      "guideDescription": "Practical tips to get you started.",
+      "supportDescription": "A hand whenever you need one."
+    },
+    "next": "Next",
+    "skip": "Skip",
+    "guide": "View guide",
+    "support": "Help & support",
+    "done": "Let’s go",
+    "progress": "$1 of $2"
   }
 }

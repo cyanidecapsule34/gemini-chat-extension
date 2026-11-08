@@ -50,11 +50,6 @@
   "responseNotificationMessage": "답변이 준비되었습니다.",
   "bulkDelete": {
     "entryLabel": "일괄 삭제",
-    "entryHint": {
-      "title": "일괄 삭제",
-      "description": "다중 선택 모드로 들어가려면 누르세요. 삭제할 채팅을 선택한 다음 확인하세요.",
-      "dismiss": "닫기"
-    },
     "selectRecent": "최근 $1개 선택",
     "selectUnpinned": "최근 고정되지 않은 $1개 선택",
     "change": "변경",
@@ -76,12 +71,33 @@
   },
   "quickFollow": {
     "more": "더보기",
-    "moreAriaLabel": "더 많은 프롬프트 표시"
+    "moreAriaLabel": "더 많은 프롬프트 표시",
+    "multiSelection": {
+      "selectedText": "선택한 텍스트",
+      "userComment": "사용자 댓글",
+      "editComment": "댓글 수정",
+      "commentPlaceholder": "댓글 추가…",
+      "add": "추가",
+      "send": "보내기",
+      "addToDraft": "초안에 추가",
+      "sendSeparately": "따로 보내기",
+      "selectionNumber": "선택 항목 $1",
+      "addFailed": "선택 항목을 추가하지 못했습니다",
+      "maxSelections": "선택 항목은 최대 10개까지 추가할 수 있습니다",
+      "removeSelection": "선택 항목 삭제",
+      "updateFailed": "초안을 업데이트하지 못했습니다",
+      "sendFailed": "보내지 못했습니다. 초안은 유지되었습니다.",
+      "sendUnknown": "전송 여부를 확인할 수 없습니다. 초안은 유지되었습니다.",
+      "restoreDraft": "초안 복원",
+      "restoreFailed": "초안을 복원하지 못했습니다. 입력란을 비우고 다시 시도하세요.",
+      "unsupportedDraft": "이 초안은 안전하게 보관할 수 없습니다. 첨부 파일과 서식이 있는 콘텐츠를 먼저 보내거나 삭제하세요."
+    }
   },
   "settings": {
     "quickFollow": {
       "title": "빠른 후속 질문",
       "enable": "빠른 후속 질문 활성화",
+      "enableDescription": "빠른 후속 질문을 켜면 Gemini 기본 질문 버튼이 숨겨집니다. 끄면 다시 표시됩니다.",
       "customPrompts": {
         "title": "스킬 관리",
         "description": "처음 $1개의 스킬이 고정되어 있습니다. 가로로 스크롤하여 더 많이 볼 수 있습니다",
@@ -181,7 +197,15 @@
       "enableBackgroundImage": "배경화면 활성화",
       "backgroundImageUpload": "배경 이미지 업로드",
       "dropBackground": "여기에 이미지 드롭",
-      "fileTypes": "PNG, JPG 또는 WebP(최대 5MB)",
+      "themeBloom": {
+        "title": "Theme Bloom",
+        "description": "프롬프트 상자 밖에 이미지를 놓으면 어울리는 테마를 적용하고, 안에 놓으면 일반 업로드됩니다.",
+        "analyzing": "테마를 맞추는 중…",
+        "dropHint": "놓으면 테마가 적용됩니다",
+        "applyImageFailed": "이미지를 적용할 수 없습니다"
+      },
+      "interactions": "상호작용",
+      "fileTypes": "PNG, JPG, WebP 및 AVIF(최대 10MB)",
       "selectFile": "파일 선택",
       "blurIntensity": "흐림",
       "backgroundPosition": "위치",
@@ -212,8 +236,9 @@
       "chatTextColor": "메시지 텍스트 색상",
       "chatTextColorModeDescription": "모드: $1",
       "resetChatTextColor": "초기화",
-      "invalidFileType": "PNG/JPG/WebP만 지원됩니다",
-      "fileTooLarge": "이미지 크기는 5MB 이하여야 합니다",
+      "invalidFileType": "PNG/JPG/WebP/AVIF만 지원됩니다",
+      "fileTooLarge": "이미지 크기는 10MB 이하여야 합니다",
+      "imageTooLarge": "이미지 크기는 40MP를 초과할 수 없습니다",
       "imageLoadFailed": "이미지 로드 실패, 다시 시도해 주세요",
       "removeBackgroundImage": "배경 이미지 제거"
     },
@@ -474,6 +499,8 @@
         "toggleBulkDelete": "일괄 삭제 전환",
         "toggleBulkDeleteDisabledInfo": "일괄 삭제가 꺼져 있습니다. 설정에서 켠 다음 이 단축키를 사용하세요.",
         "openNewChat": "새 채팅 열기",
+        "deleteCurrentChat": "현재 채팅 삭제",
+        "deleteCurrentChatInfo": "이 단축키는 삭제 확인을 엽니다. Enter 키를 누르면 현재 채팅 삭제를 확정합니다.",
         "openTemporaryChat": "임시 채팅 열기",
         "openLibrary": "라이브러리 열기",
         "openGems": "Gems 열기",
@@ -553,15 +580,40 @@
   "whatsnew": {
     "title": "새로운 기능",
     "releaseNotes": "릴리스 노트",
-    "chatLayout": {
-      "title": "Gemini를 내 흐름에 맞게",
-      "description": "채팅과 입력창의 너비를 조정해 Gemini 대화를 더 편안하고 집중하기 쉽게, 따라가기 좋게 만듭니다.",
-      "action": "채팅 레이아웃 조정"
-    },
-    "gemAvatar": {
-      "title": "각 Gem에 얼굴을 더하세요",
-      "description": "각 Gem에 아바타를 설정해 이름을 눈에 보이는 개성 있는 캐릭터로 바꿔 보세요.",
-      "action": "확장 기능 열기"
+    "multiAsk": {
+      "title": "Gemini용 Multi-Ask 출시",
+      "description": "질문을 기억해 두지 않아도 계속 읽을 수 있어요. 읽으며 모아 두었다가 알맞은 맥락과 함께 한 번에 물어보세요.",
+      "action": "사용 가이드 보기"
     }
+  },
+  "onboarding": {
+    "width": {
+      "title": "긴 답변도 편하게 읽기",
+      "description": "대화 너비를 조정해 긴 글과 코드가 보기 좋게 표시되도록 하세요."
+    },
+    "theme": {
+      "title": "내 취향에 맞는 Gemini",
+      "description": "매일 사용하는 작업 공간에 어울리는 색상과 배경을 선택하세요."
+    },
+    "bulkDelete": {
+      "title": "채팅을 더 빠르게 정리",
+      "description": "더 이상 필요 없는 대화를 여러 개 선택해 한 번에 정리하세요."
+    },
+    "settings": {
+      "title": "필요한 도구를 한곳에서",
+      "description": "언제든 Gemini Power Kit을 열어 필요한 도구와 설정을 찾아보세요."
+    },
+    "finish": {
+      "title": "모든 준비가 끝났어요!",
+      "description": "Gemini를 원하는 방식으로 사용해 보세요. 유용한 팁을 살펴보고, 필요할 때 언제든 도움을 받을 수 있어요.",
+      "guideDescription": "시작에 도움이 되는 실용적인 팁",
+      "supportDescription": "필요할 때 언제든 도움을 받을 수 있어요."
+    },
+    "next": "다음",
+    "skip": "건너뛰기",
+    "guide": "가이드 보기",
+    "support": "도움말 및 지원",
+    "done": "시작하기",
+    "progress": "$1 / $2"
   }
 }

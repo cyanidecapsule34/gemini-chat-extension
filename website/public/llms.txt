@@ -1,6 +1,6 @@
 # Gemini Power Kit
 
-> Gemini Power Kit is a browser extension for Google Gemini. It adds Chat Outline navigation, Quick Follow-up actions, Chain Prompt automation, custom Gem avatars, tab title sync, reply-completion notifications, open-in-new-tab workflows, and theme customization.
+> Gemini Power Kit is a browser extension for Google Gemini. It adds Chat Outline navigation, Quick Follow-up for collecting questions as you read and asking them together with quoted text, Chain Prompt automation, custom Gem avatars, tab title sync, reply-completion notifications, open-in-new-tab workflows, and theme customization.
 
 This website documents the public product, installation flow, feature behavior, troubleshooting guidance, release notes, and privacy policy for Gemini Power Kit. English pages are the canonical documentation set, with Chinese pages available under `/zh-cn/`.
 
@@ -8,30 +8,43 @@ This website documents the public product, installation flow, feature behavior, 
 
 - [Official Website](https://gpk.ronktsang.com/): Product overview and primary documentation entry point.
 - [Chrome Web Store Listing](https://chromewebstore.google.com/detail/ihakfpnmefdkllhkecanagmienfnmojn): Official install page for Gemini Power Kit.
+- [Firefox Add-ons Listing](https://addons.mozilla.org/en-US/firefox/addon/gemini-power-kit/): Official Firefox installation.
 - [GitHub Repository](https://github.com/RonkTsang/gemini-chat-extension): Source repository for the extension.
 
 ## Core Docs
 
-- [Install](https://gpk.ronktsang.com/guide/install/): How to install Gemini Power Kit.
+- [Install](https://gpk.ronktsang.com/guide/install/): Chrome and Firefox store installation, settings entry, and setup troubleshooting.
 - [Quick Start](https://gpk.ronktsang.com/guide/quick-start/): First steps after installation.
 - [Features Overview](https://gpk.ronktsang.com/features/): Index of the main feature pages.
+
+## Tips And Tutorials
+
+- [Tips & Tutorials](https://gpk.ronktsang.com/tips/): Task-focused guides with examples and practical Gemini Power Kit usage tips.
+- [Navigate Long Gemini Chats with Chat Outline](https://gpk.ronktsang.com/tips/find-earlier-gemini-prompts/): Browse Chat Outline as a clickable table of contents for the current Gemini conversation’s prompts and attachments, including image thumbnails, video covers, and file details. Select an entry to navigate directly to its message.
+- [Change Gemini Chat Background and Theme](https://gpk.ronktsang.com/tips/change-gemini-background/): Start with a Theme Bloom image drop to change the Gemini chat background and color preset, then adjust readability or troubleshoot common issues.
+
+- [Delete Multiple Gemini Chats at Once](https://gpk.ronktsang.com/tips/delete-multiple-gemini-chats/): Select chats individually or choose a recent batch, exclude pinned chats from quick selection, review the count, and confirm deletion.
+- [Get Notified When Gemini Finishes](https://gpk.ronktsang.com/tips/get-notified-when-gemini-finishes/): Set up Gemini reply and Deep Research desktop notifications, add an optional Chromium notification sound, and troubleshoot missing completion alerts.
+- [How to Use Ask Gemini to Reply to Selected Text](https://gpk.ronktsang.com/tips/ask-follow-up-about-gemini-response/): Keep reading without forgetting questions: note them beside the text, edit them if needed, and ask them together with each passage attached.
+- [Make Gemini Chat Wider](https://gpk.ronktsang.com/tips/make-gemini-chat-wider/): Use Chat layout to increase Gemini chat width or use the full available page width for code and tables, adjust input width independently, and restore defaults.
 
 ## Features
 
 - [Chat Outline](https://gpk.ronktsang.com/features/chat-outline/): Navigate long Gemini conversations and jump between key sections.
-- [Quick Follow-up](https://gpk.ronktsang.com/features/quick-follow-up/): Ask contextual follow-up questions from selected text and saved prompts.
+- [Quick Follow-up](https://gpk.ronktsang.com/features/quick-follow-up/): Note questions beside a long Gemini answer as you read, then ask them together without remembering every question or finding the passages again. Includes illustrated steps for up to 10 references, sending, and editing.
 - [Chain Prompt](https://gpk.ronktsang.com/features/chain-prompt/): Build reusable multi-step Gemini prompt workflows.
 - [Open in New Tab](https://gpk.ronktsang.com/features/stuff-open-new-tab/): Open Gemini Library items in new tabs without interrupting the current page.
 - [Tab Title Sync](https://gpk.ronktsang.com/features/tab-title-sync/): Sync browser tab titles with Gemini conversation titles.
 - [Gemini Reply Completion Notifications](https://gpk.ronktsang.com/features/notifications/): Receive system notifications when Gemini finishes replying.
 - [Gemini Bulk Delete Chats](https://gpk.ronktsang.com/features/bulk-delete/): Select multiple recent Gemini chats, exclude pinned conversations, and delete an intentional batch at once.
-- [Theme Customizer](https://gpk.ronktsang.com/features/theme/): Customize Gemini appearance with themes, colors, wallpaper, and readability controls.
+- [Theme Customizer](https://gpk.ronktsang.com/features/theme/): Customize Gemini appearance with themes, colors, wallpaper, readability controls, and Theme Bloom image-drop interactions that match a wallpaper to a color preset.
 - [Gemini Chat Layout Settings](https://gpk.ronktsang.com/features/chat-layout/): Adjust Gemini chat and prompt widths, user-message alignment, and full-width messages from the top bar or Theme settings.
 - [Gem Avatar](https://gpk.ronktsang.com/features/gem-avatar/): Give each Gemini Gem a custom local avatar, then make its character easier to recognize in chats.
 
 ## Support And Policy
 
 - [FAQ](https://gpk.ronktsang.com/support/faq/): Common questions about Gemini Power Kit.
+- [Support](https://gpk.ronktsang.com/support/): Email support, public GitHub feedback, and troubleshooting resources.
 - [Notification Troubleshooting](https://gpk.ronktsang.com/support/notification-troubleshooting/): Browser and operating-system checks for notification delivery.
 - [What's New](https://gpk.ronktsang.com/support/whats-new/): Product release notes and feature updates.
 - [Privacy Policy](https://gpk.ronktsang.com/privacy-policy/): Privacy policy for Gemini Power Kit.
@@ -39,10 +52,20 @@ This website documents the public product, installation flow, feature behavior, 
 ## Chinese Docs
 
 - [Chinese Overview](https://gpk.ronktsang.com/zh-cn/): Gemini Power Kit Chinese overview.
+- [Chinese Support](https://gpk.ronktsang.com/zh-cn/support/): Chinese support page with email and GitHub contact channels.
 - [Chinese Install](https://gpk.ronktsang.com/zh-cn/guide/install/): Chinese installation guide.
 - [Chinese Quick Start](https://gpk.ronktsang.com/zh-cn/guide/quick-start/): Chinese quick-start guide.
 - [Chinese Features Overview](https://gpk.ronktsang.com/zh-cn/features/): Chinese feature index.
 - [Chinese Privacy Policy](https://gpk.ronktsang.com/zh-cn/privacy-policy/): Chinese privacy policy.
+
+- [Chinese Tips & Tutorials](https://gpk.ronktsang.com/zh-cn/tips/): Chinese usage tutorials.
+- [Chinese Chat Outline Navigation Tutorial](https://gpk.ronktsang.com/zh-cn/tips/find-earlier-gemini-prompts/): Chinese guide to browsing the current Gemini conversation’s prompts and attachments as a clickable outline and navigating directly to a message.
+- [Chinese Background Tutorial](https://gpk.ronktsang.com/zh-cn/tips/change-gemini-background/): Chinese guide to setting a custom Gemini chat wallpaper and matching theme colors with Theme Bloom.
+
+- [Chinese Delete Multiple Gemini Chats at Once](https://gpk.ronktsang.com/zh-cn/tips/delete-multiple-gemini-chats/): Chinese tutorial. Select chats individually or choose a recent batch, exclude pinned chats from quick selection, review the count, and confirm deletion.
+- [Chinese Get Notified When Gemini Finishes](https://gpk.ronktsang.com/zh-cn/tips/get-notified-when-gemini-finishes/): Chinese tutorial. Set up Gemini reply and Deep Research desktop notifications, add an optional Chromium notification sound, and troubleshoot missing completion alerts.
+- [Chinese Ask Gemini Quote Reply Tutorial](https://gpk.ronktsang.com/zh-cn/tips/ask-follow-up-about-gemini-response/): Chinese tutorial. Keep reading without forgetting questions: note them beside the text, edit them if needed, and ask them together with each passage attached.
+- [Chinese Make Gemini Chat Wider](https://gpk.ronktsang.com/zh-cn/tips/make-gemini-chat-wider/): Chinese tutorial. Use Chat layout to increase Gemini chat width or use the full available page width for code and tables, adjust input width independently, and restore defaults.
 
 ## Optional
 

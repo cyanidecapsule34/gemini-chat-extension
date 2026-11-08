@@ -1,3 +1,97 @@
+# [0.14.0](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.13.0...v0.14.0) (2026-11-01)
+
+
+### Bug Fixes
+
+* **multi-ask:** complete release announcements and documentation ([#74](https://github.com/RonkTsang/gemini-chat-extension/issues/74)) ([4af8fb0](https://github.com/RonkTsang/gemini-chat-extension/commit/4af8fb0a802b5f44f3abc854c74839a7e1ec74e1))
+* **onboarding:** shorten missing-target wait to one second ([#76](https://github.com/RonkTsang/gemini-chat-extension/issues/76)) ([dc50e2e](https://github.com/RonkTsang/gemini-chat-extension/commit/dc50e2e29fc55c91e0dd539283fd12e367f44b7d))
+* **theme:** remove input top padding with background enabled ([07c19ae](https://github.com/RonkTsang/gemini-chat-extension/commit/07c19aefc9ec83055fc18b8baed87fc1f5f03fcb))
+
+
+### Features
+
+* **onboarding:** add new user guide ([#75](https://github.com/RonkTsang/gemini-chat-extension/issues/75)) ([afd4a6b](https://github.com/RonkTsang/gemini-chat-extension/commit/afd4a6b8e2934e099da95168b7579a371bfda747))
+
+# [0.13.0](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.7...v0.13.0) (2026-10-31)
+
+
+### Features
+
+* **quick-follow-up:** add multiple selections and per-selection comments ([#73](https://github.com/RonkTsang/gemini-chat-extension/issues/73)) ([282622d](https://github.com/RonkTsang/gemini-chat-extension/commit/282622dc1a3053235314a84100949f46934d87f7))
+
+## [0.12.7](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.6...v0.12.7) (2026-10-30)
+
+
+### Bug Fixes
+
+* **bulk-delete:** adjust margin-top for entry button to improve alignment ([873d1aa](https://github.com/RonkTsang/gemini-chat-extension/commit/873d1aa19d907163ec04f79345c4d26014396c45))
+* **bulk-delete:** update button text color variable for consistency ([250d41b](https://github.com/RonkTsang/gemini-chat-extension/commit/250d41be28ee81f271a59257f9cc1e83f87e124b))
+* **library:** restore new-tab buttons across Library versions ([c2fb5d4](https://github.com/RonkTsang/gemini-chat-extension/commit/c2fb5d43610a61800cb5f412469f06ff62b644b9))
+
+## [0.12.6](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.5...v0.12.6) (2026-10-08)
+
+
+### Bug Fixes
+
+* **chat-settings:** add input-area-v2 selector and update styles for improved layout handling ([#71](https://github.com/RonkTsang/gemini-chat-extension/issues/71)) ([6a40913](https://github.com/RonkTsang/gemini-chat-extension/commit/6a409138027a5f3ea4aef279875eebd923cbe1bf))
+
+## [0.12.5](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.4...v0.12.5) (2026-09-30)
+
+
+### Bug Fixes
+
+* **library:** support declared route DOM and initial media preload ([#69](https://github.com/RonkTsang/gemini-chat-extension/issues/69)) ([647c0db](https://github.com/RonkTsang/gemini-chat-extension/commit/647c0db9030a9c86d38322c6b97fce74998b8e5c))
+* **tab-title:** support Spark Task titles and remove obsolete chat fallback ([#68](https://github.com/RonkTsang/gemini-chat-extension/issues/68)) ([88e3687](https://github.com/RonkTsang/gemini-chat-extension/commit/88e36875e4cd9333069870f3f8be0bd706f8cd2c))
+
+## [0.12.4](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.3...v0.12.4) (2026-09-28)
+
+
+### Bug Fixes
+
+* support Gemini input container v2 width ([#65](https://github.com/RonkTsang/gemini-chat-extension/issues/65)) ([186d9ec](https://github.com/RonkTsang/gemini-chat-extension/commit/186d9ec6138bc4825e1f9b2a834db8ac969385ad))
+* support open in new tab on new Library page ([#66](https://github.com/RonkTsang/gemini-chat-extension/issues/66)) ([5e9719c](https://github.com/RonkTsang/gemini-chat-extension/commit/5e9719c8979247506e0b197fa97cbd9c2cdf5b1e))
+* **theme:** adapt Gemini New Chat glow ([#64](https://github.com/RonkTsang/gemini-chat-extension/issues/64)) ([38bb9a3](https://github.com/RonkTsang/gemini-chat-extension/commit/38bb9a3fc0569207c419089a01389579807175f7))
+* **theme:** Theme reply width and Library background surfaces ([#67](https://github.com/RonkTsang/gemini-chat-extension/issues/67)) ([050f6fd](https://github.com/RonkTsang/gemini-chat-extension/commit/050f6fd3f937f2c0f040b4e4c1c68d49d9452b6f))
+
+## [0.12.3](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.2...v0.12.3) (2026-09-26)
+
+
+### Bug Fixes
+
+* align tables and actions in custom chat width ([#63](https://github.com/RonkTsang/gemini-chat-extension/issues/63)) ([dd15bdc](https://github.com/RonkTsang/gemini-chat-extension/commit/dd15bdc8732333d01f704232866fd94f6143a33d))
+* **open-in-new-tab:** parse encoded library card metadata ([#61](https://github.com/RonkTsang/gemini-chat-extension/issues/61)) ([d532b7a](https://github.com/RonkTsang/gemini-chat-extension/commit/d532b7a55ad25119ec1853d1995854849166c734))
+* **shortcut:** add selectors for opening and closing the sidebar ([#62](https://github.com/RonkTsang/gemini-chat-extension/issues/62)) ([a7dba1e](https://github.com/RonkTsang/gemini-chat-extension/commit/a7dba1e711b02d2b5842291048bdb7fff35f0529))
+
+## [0.12.2](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.1...v0.12.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* align model glass bubble with chat width ([#60](https://github.com/RonkTsang/gemini-chat-extension/issues/60)) ([abce877](https://github.com/RonkTsang/gemini-chat-extension/commit/abce877fa4a2d37ec08f4c67d96b713f4644005b))
+* **quick-follow:** scope input targeting to chat-window in spark mode ([#59](https://github.com/RonkTsang/gemini-chat-extension/issues/59)) ([084d2e4](https://github.com/RonkTsang/gemini-chat-extension/commit/084d2e4d6d8d23dee4376c72b6ed11d4d31e0e4c))
+
+## [0.12.1](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.12.0...v0.12.1) (2026-09-06)
+
+
+### Bug Fixes
+
+* make bulk deletion target the correct pinned chat ([#58](https://github.com/RonkTsang/gemini-chat-extension/issues/58)) ([9767d13](https://github.com/RonkTsang/gemini-chat-extension/commit/9767d13d82b3600d2dcc7e67539dfb639d8ca1ac))
+
+# [0.12.0](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.11.0...v0.12.0) (2026-08-16)
+
+
+### Bug Fixes
+
+* restore bulk delete entry ([#55](https://github.com/RonkTsang/gemini-chat-extension/issues/55)) ([efcfc2d](https://github.com/RonkTsang/gemini-chat-extension/commit/efcfc2d603d64f39c9a7b03e6bad1bada938d78d))
+* **shortcuts:** make New Chat navigation resilient ([#56](https://github.com/RonkTsang/gemini-chat-extension/issues/56)) ([eb1afa0](https://github.com/RonkTsang/gemini-chat-extension/commit/eb1afa054462955cdcdfc1c7994d661edd79775f))
+* **ui:** polish Theme styles and Top bar tooltips ([#54](https://github.com/RonkTsang/gemini-chat-extension/issues/54)) ([5485b3e](https://github.com/RonkTsang/gemini-chat-extension/commit/5485b3e95cb846e01877625a66878d362cfc1f2c))
+
+
+### Features
+
+* **shortcuts:** add delete current chat action ([#52](https://github.com/RonkTsang/gemini-chat-extension/issues/52)) ([d027cb9](https://github.com/RonkTsang/gemini-chat-extension/commit/d027cb970293c41ab0e1cbc98c67c77fe18002a2))
+* **theme-bloom:** add drag-to-theme feature ([#53](https://github.com/RonkTsang/gemini-chat-extension/issues/53)) ([71dbacb](https://github.com/RonkTsang/gemini-chat-extension/commit/71dbacbcf0d971d8d311e626f270d533fc3175c0))
+
 # [0.11.0](https://github.com/RonkTsang/gemini-chat-extension/compare/v0.10.0...v0.11.0) (2026-07-26)
 
 

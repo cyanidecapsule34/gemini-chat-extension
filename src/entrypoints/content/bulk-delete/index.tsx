@@ -1,6 +1,7 @@
 import { createRoot, type Root } from 'react-dom/client'
 import { t } from '@/utils/i18n'
-import { BulkDeleteEntryHint } from './BulkDeleteEntryHint'
+import { destroyGeminiTooltipsWhere } from '../gemini-tooltip'
+import { BulkDeleteEntry } from './BulkDeleteEntry'
 import { toaster } from '@/components/ui/toaster'
 import {
   cleanupChatCheckboxes,
@@ -56,7 +57,7 @@ function renderEntry(): void {
   }
 
   entryRoot?.render(
-    <BulkDeleteEntryHint
+    <BulkDeleteEntry
       active={active}
       onToggle={() => {
         if (active) {
@@ -129,6 +130,9 @@ function syncCheckboxes(): void {
 
 function reconcile(): void {
   reconcileFrame = null
+  destroyGeminiTooltipsWhere((reference, owner) =>
+    owner === 'bulk-delete' && !reference.isConnected
+  )
   renderEntry()
   if (active) {
     syncCheckboxes()
@@ -375,6 +379,7 @@ export function stopBulkDelete(): void {
   observer?.disconnect()
   observer = null
   document.removeEventListener('keydown', handleKeyDown)
+  destroyGeminiTooltipsWhere((_reference, owner) => owner === 'bulk-delete')
   exitBulkDeleteMode()
   entryRoot?.unmount()
   entryRoot = null

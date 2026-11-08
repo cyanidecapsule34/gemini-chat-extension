@@ -102,6 +102,10 @@ Verifies all locale files against English base.
 2. Starts `urlMonitor` then `chatChangeDetector`
 3. Mounts UI overlay via `renderOverlay`
 
+### Gemini DOM Integration
+
+- For code that queries, traverses, observes, or mutates Gemini-owned DOM, follow [`docs/agent_guides/gemini-dom.md`](docs/agent_guides/gemini-dom.md).
+
 ### Data Layer (Dexie/IndexedDB)
 - Database: `src/data/db.ts` (name: `gemini_extension`)
 - Access via repositories in `src/data/repositories`
@@ -123,6 +127,8 @@ Verifies all locale files against English base.
 - Use Chakra components and the configured system theme from `src/components/ui/theme`
 - Keep UI rendering within the Shadow DOM subtree
 - When using Chakra overlay anchors such as `Popover.Trigger asChild`, the direct child must be a DOM element or a component that forwards `ref` and trigger props to the underlying Chakra/DOM element. If a custom trigger component does not use `forwardRef` and prop passthrough, Popover positioning can fall back to the viewport origin and appear in the top-left corner.
+- Do not define inline `@keyframes` inside a Chakra component's `css` prop. Chakra v3's style normalization can produce invalid keyframe rules: `animation-name` and even a running animation timeline may exist while the element remains still. Define animations with `keyframes` from `@emotion/react` and interpolate the result into the animation value (for example, ``animation: `${float} 2.8s ease-in-out infinite` ``); Emotion registers the rules through the Shadow DOM cache. See `src/entrypoints/content/overlay/onboarding/animations.ts`.
+- Verify animations by checking that keyframe rules are emitted and that computed transforms or opacity change over time in the live page; an animation name or advancing timeline alone is insufficient. Respect `prefers-reduced-motion` and confirm the browser loaded the latest extension build before evaluating motion.
 - Common modules:
   - Settings panel: `src/components/setting-panel`
   - Toaster: `src/components/ui/toaster.tsx`
@@ -161,3 +167,8 @@ Verifies all locale files against English base.
 - **Manifest**: Generated from `wxt.config.ts`. Do not edit the legacy root `manifest.json` for WXT builds.
 - **Post-install**: `postinstall` runs `wxt prepare` automatically.
 - **Legacy files**: See `.cursor/rules/legacy-files-note.mdc` for deprecated files to avoid modifying.
+
+## Git Naming
+
+- Use Conventional Commits: `<type>(<scope>): <description>`.
+- Name branches `<type>/<short-description>`, for example `fix/tab-title-spark-task`.

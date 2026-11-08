@@ -3,7 +3,9 @@
  * Defines the release notes for the current version
  */
 
+import { EXTERNAL_LINKS } from '@/common/config'
 import type { NavigationSection } from '@/components/setting-panel/config'
+import multiAskImagePath from '@/assets/whatsnew/multi-ask.webp'
 
 export interface SettingPanelPromoAction {
   action: 'setting-panel'
@@ -20,10 +22,18 @@ export interface ChatSettingsPanelPromoAction {
   action: 'chat-settings-panel'
 }
 
+export interface ExternalLinkPromoAction {
+  action: 'external-link'
+  params: {
+    url: string
+  }
+}
+
 export type ReleaseNotePromoAction =
   | SettingPanelPromoAction
   | ThemeFloatingPanelPromoAction
   | ChatSettingsPanelPromoAction
+  | ExternalLinkPromoAction
 
 export interface ReleaseNote {
   titleKey: string // i18n key for feature title
@@ -40,22 +50,15 @@ export interface ReleaseNote {
  */
 export const CURRENT_RELEASE_NOTES: ReleaseNote[] = [
   {
-    titleKey: 'whatsnew.chatLayout.title',
-    descriptionKey: 'whatsnew.chatLayout.description',
-    actionLabelKey: 'whatsnew.chatLayout.action',
+    titleKey: 'whatsnew.multiAsk.title',
+    descriptionKey: 'whatsnew.multiAsk.description',
+    actionLabelKey: 'whatsnew.multiAsk.action',
+    promoImagePath: multiAskImagePath,
     promoAction: {
-      action: 'chat-settings-panel'
-    }
-  },
-  {
-    titleKey: 'whatsnew.gemAvatar.title',
-    descriptionKey: 'whatsnew.gemAvatar.description',
-    actionLabelKey: 'whatsnew.gemAvatar.action',
-    promoAction: {
-      action: 'setting-panel',
+      action: 'external-link',
       params: {
-        tab: 'enhancements'
-      }
-    }
-  }
+        url: EXTERNAL_LINKS.QUICK_FOLLOW_UP_GUIDE,
+      },
+    },
+  },
 ]

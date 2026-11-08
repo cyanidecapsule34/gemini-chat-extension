@@ -1,6 +1,6 @@
 ---
 name: gemini-power-kit-verify
-description: Live browser verification workflow for Gemini Power Kit on gemini.google.com using Codex's built-in chrome:control-chrome skill. Use when Codex has completed a feature, fixed a UI/runtime issue, or the user asks to verify plugin behavior on the live Gemini page, including settingPanel, SideNav entry, chat flows, temporary chats, model selection, quick follow-up, user-query/model-response interactions, or Gemini DOM selector checks.
+description: Live browser verification workflow for Gemini Power Kit on gemini.google.com using the @Chrome browser tool. Use when Codex has completed a feature, fixed a UI/runtime issue, or the user asks to verify plugin behavior on the live Gemini page, including settingPanel, SideNav entry, chat flows, temporary chats, model selection, quick follow-up, user-query/model-response interactions, or Gemini DOM selector checks.
 ---
 
 # Gemini Power Kit Verify
@@ -11,14 +11,14 @@ Verify Gemini Power Kit behavior on the live Gemini page with the user's logged-
 
 ## Tool Priority
 
-Use Codex's built-in `chrome:control-chrome` skill for all live browser verification. Follow that skill's bootstrap, interaction, safety, troubleshooting, and tab-finalization instructions. This path uses the user's real Chrome profile, Gemini login, and installed extension state.
+Use [@Chrome](plugin://browser@openai-bundled?browserFamily=chrome) for all live browser verification. Connect to the user's Chrome browser and use its existing tabs or open Gemini there; this path uses the user's real Chrome profile, Gemini login, and installed extension state. Follow the browser tool's own interaction and safety instructions when available.
 
-Do not substitute another browser automation tool, a fresh browser profile, or a headless browser. If `chrome:control-chrome` is unavailable or cannot connect after following its required troubleshooting workflow, report that live verification is blocked.
+Do not substitute another browser automation tool, a fresh browser profile, or a headless browser. If @Chrome is unavailable or cannot connect, report that live verification is blocked; do not report `chrome:control-chrome` as the missing dependency.
 
 ## Safety Rules
 
-- Before sending any prompt to Gemini, ensure the selected model text in `<bard-mode-switcher>` is a `*-Lite` model.
-- If a Lite model cannot be found or selected, stop before sending a prompt and report that verification is blocked.
+- Before sending any prompt to Gemini, ensure the selected model text in `<bard-mode-switcher>` is either a `*-Lite` model or `Auto`.
+- If neither a Lite model nor `Auto` can be found or selected, stop before sending a prompt and report that verification is blocked.
 - Prefer temporary chats via `<temp-chat-button>` when a test needs to send a prompt, so history is not polluted.
 - Do not inspect unrelated chat history. Enter only the chat needed for the requested verification.
 - When selectors are likely to drift, inspect both current repo code and live DOM before deciding on interactions or fixes.
@@ -64,16 +64,16 @@ Check the relevant source before relying on selectors that are not listed in the
 3. Treat `<user-query>` as user messages and `<model-response>` as model replies.
 4. For input boxes, send buttons, stop buttons, quote UI, and other volatile Gemini controls, read current selectors from repo code and confirm against live DOM before interacting.
 
-## Temporary Chat and Lite Model Flow
+## Temporary Chat and Model Selection Flow
 
 Use this flow before any verification that sends a prompt:
 
 1. Open `https://gemini.google.com/app`.
 2. Enter temporary chat using `<temp-chat-button>` when available.
 3. Inspect `<bard-mode-switcher>` and read the selected model text.
-4. If the model is not a `*-Lite` model, click `<bard-mode-switcher>`.
-5. In the menu under `data-test-id="bard-mode-desktop-gem-menu"`, choose the Flash-Lite or other Lite model, commonly the first list item.
-6. Confirm `<bard-mode-switcher>` now shows a `*-Lite` model before sending.
+4. If the model is neither a `*-Lite` model nor `Auto`, click `<bard-mode-switcher>`.
+5. In the menu under `data-test-id="bard-mode-desktop-gem-menu"`, choose either `Auto` or Flash-Lite/another Lite model.
+6. Confirm `<bard-mode-switcher>` now shows `Auto` or a `*-Lite` model before sending.
 
 ## Quick Follow-Up Example
 
@@ -81,7 +81,7 @@ Use this as the reference path for quick follow-up or selection-based chat featu
 
 1. Open `https://gemini.google.com/app`.
 2. Enter temporary chat.
-3. Ensure the selected model is Flash-Lite or another `*-Lite` model.
+3. Ensure the selected model is `Auto`, Flash-Lite, or another `*-Lite` model.
 4. Send a low-cost prompt such as `What is Gemini Power Kit?`.
 5. Wait until a `<model-response>` has finished rendering.
 6. Select a paragraph inside the latest `<model-response>`.

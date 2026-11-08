@@ -45,6 +45,11 @@
   z-index: 1;
 }
 
+:root[data-gpk-bg-enabled="true"] library-island-page [data-library-island-root] > [data-root-style] > div,
+:root[data-gpk-bg-enabled="true"] library-island-page [data-library-island-root] > [data-root-style] > div > header {
+  background-color: transparent !important;
+}
+
 :root[data-gpk-bg-enabled="true"] body.dark-theme #gpk-theme-bg-layer,
 :root[data-gpk-bg-enabled="true"]:has(:where(.theme-host):where(.dark-theme)) #gpk-theme-bg-layer {
   filter: blur(var(--gpk-bg-blur)) brightness(0.5);
@@ -153,10 +158,20 @@
   border: none;
 }
 
-:root[data-gpk-bg-enabled="true"] body.light-theme model-response response-container>div.response-container,
-:root[data-gpk-bg-enabled="true"] :where(.theme-host):where(.light-theme) model-response response-container>div.response-container,
-:root[data-gpk-bg-enabled="true"][data-gpk-msg-glass="true"] model-response response-container>div.response-container {
+:root[data-gpk-bg-enabled="true"][data-gpk-msg-glass] model-response response-container>div.response-container {
   padding: 12px;
+}
+
+:root[data-gpk-bg-enabled="true"][data-gpk-msg-glass] chat-window:not(.preview-chat-window):not(.in-gems-mode) model-response response-container>div.response-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--bard-chat-window-content-width-default, 708px) + 48px);
+  margin-inline: auto;
+}
+
+:root[data-gpk-chat-width][data-gpk-bg-enabled="true"][data-gpk-msg-glass] chat-window:not(.preview-chat-window):not(.in-gems-mode) model-response response-container>div.response-container {
+  max-width: 100%;
+  padding-inline: 24px;
 }
 
 :root[data-gpk-bg-enabled="true"] dual-model-response {
@@ -309,6 +324,10 @@
   box-shadow: inset 0 0 1px 0 #ffffff;
 }
 
+:root[data-gpk-bg-enabled="true"] chat-window input-container {
+  padding-top: 0px !important;
+}
+
 :root[data-gpk-bg-enabled="true"] input-container::before,
 :root[data-gpk-bg-enabled="true"] bard-sidenav-container>bard-sidenav>side-navigation-content>div>div>infinite-scroller .top-gradient,
 :root[data-gpk-bg-enabled="true"] bard-sidenav-container>bard-sidenav>side-navigation-content>div>div>infinite-scroller .bottom-gradient {
@@ -320,6 +339,11 @@
 }
 
 :root[data-gpk-bg-enabled="true"] chat-window.show-lm-background::before {
+  display: none !important;
+}
+
+/* Hide Gemini's New Chat glow when a custom background is active. */
+:root[data-gpk-bg-enabled="true"] chat-window > div.lm-glow {
   display: none !important;
 }
 
@@ -335,6 +359,10 @@
 :root[data-gpk-bg-enabled="true"] input-area-v2>div>auto-suggest>div {
   border-radius: 24px;
   background: var(--gem-sys-color--surface-bright);
+}
+
+:root[data-gpk-bg-enabled="true"] .autosuggest-scrim {
+  background: none;
 }
 
 :root[data-gpk-bg-enabled="true"] div.blur-bg.visible-primary-message.blur-shown {

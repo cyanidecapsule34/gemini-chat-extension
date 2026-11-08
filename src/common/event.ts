@@ -1,10 +1,12 @@
 import { NavigationSection } from "@/components/setting-panel/config";
 import type { MediaItem } from "@/utils/stuffMediaParser";
+import type { LibraryMediaData } from '@/utils/library/mediaParser'
 
 type SettingsOpenSource =
   | 'prompt-entrance'
   | 'popup'
   | 'whats-new'
+  | 'onboarding'
   | 'theme-floating-panel'
   | 'shortcut'
 
@@ -18,6 +20,8 @@ type SettingsCloseSource =
 export const GEM_EXT_EVENTS = {
   URL_CHANGE: 'gem-ext:urlchange',
   STUFF_MEDIA_DATA: 'gem-ext:stuff-media-data',
+  LIBRARY_MEDIA_DATA: 'gem-ext:library-media-data',
+  LIBRARY_MEDIA_REQUEST: 'gem-ext:library-media-request',
   THEME_APPEARANCE_APPLY: 'gem-ext:theme-appearance-apply',
 } as const
 
@@ -25,11 +29,24 @@ export const GEM_DEV_EVENTS = {
   DEV_BULK_DELETE_FORCE_FAILURE_CHANGE: 'gem-dev:bulk-delete-force-failure-change',
 } as const
 
-export const EVENTS = {
-  QUICK_FOLLOW_UP_SHOW: 'quick-follow-up:show',
-  QUICK_FOLLOW_UP_HIDE: 'quick-follow-up:hide',
-  QUICK_FOLLOW_UP_ADD_QUOTE: 'quick-follow-up:addQuote',
-} as const;
+export type ThemeBloomState =
+  | 'idle'
+  | 'eligible-drag'
+  | 'over-theme'
+  | 'over-native-upload'
+  | 'analyzing'
+  | 'transitioning'
+  | 'error'
+
+export interface ThemeBloomVisualState {
+  state: ThemeBloomState
+  origin?: {
+    clientX: number
+    clientY: number
+  }
+  accentColor?: string
+  message?: string
+}
 
 export interface URLChangeEvent {
   url: string
@@ -49,6 +66,8 @@ export interface StuffMediaDataEvent {
   timestamp: number
 }
 
+export type LibraryMediaDataEvent = LibraryMediaData
+
 export interface AppEvents {
   // common
   'urlchange': URLChangeEvent;
@@ -56,21 +75,7 @@ export interface AppEvents {
 
   // Stuff Page
   'stuff-media:data-received': StuffMediaDataEvent;
-
-  // Quick Follow Up
-  'quick-follow-up:show': {
-    text: string;
-    event: {
-      rangeRect: DOMRect;
-      clientX: number;
-      clientY: number;
-    };
-  };
-  'quick-follow-up:hide': undefined;
-
-  'quick-follow-up:addQuote': {
-    text: string;
-  };
+  'library-media:data-received': LibraryMediaDataEvent;
 
   // settings panel
   'settings:open': {
@@ -113,6 +118,9 @@ export interface AppEvents {
       | 'settings-panel'
   };
   'chat-settings-panel:anchor-changed': undefined;
+
+  // Theme Bloom prototype
+  'theme-bloom:state-change': ThemeBloomVisualState;
 
   // Chain Prompt
   'execution:aborted-by-chat-switch': {

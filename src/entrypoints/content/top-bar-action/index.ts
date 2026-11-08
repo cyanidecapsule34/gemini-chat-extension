@@ -1,6 +1,12 @@
 import chatWidthIconSvg from '@/assets/chat-width.svg?raw'
 import { eventBus } from '@/utils/eventbus'
 import { tt } from '@/utils/i18n'
+import {
+  createGeminiTooltip,
+  destroyGeminiTooltip,
+  destroyGeminiTooltipsWhere,
+  getGeminiTooltip,
+} from '../gemini-tooltip'
 
 const APP_ROOT_SELECTOR = 'chat-app-orchestrator#app-root'
 const CHAT_APP_SELECTOR = 'chat-app'
@@ -197,6 +203,7 @@ function createEntry(kind: EntryKind): HTMLDivElement {
   button.className =
     'mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-unthemed'
   button.dataset.testId = entrySelectors.buttonTestId
+  button.dataset.gpkTour = kind === 'theme' ? 'theme' : 'chat-width'
 
   const icon = document.createElement('span')
   icon.dataset.gpkTopBarIcon = kind
@@ -207,6 +214,7 @@ function createEntry(kind: EntryKind): HTMLDivElement {
   button.addEventListener('click', (event) => {
     event.preventDefault()
     event.stopPropagation()
+    getGeminiTooltip(button)?.hide()
     openPanel(kind)
   })
 
@@ -226,7 +234,16 @@ function decorateEntry(container: HTMLElement, kind: EntryKind): void {
 
   setAttributeIfDifferent(container, 'class', 'buttons-container')
   setAttributeIfDifferent(button, 'aria-label', label)
-  setAttributeIfDifferent(button, 'title', label)
+  button.removeAttribute('title')
+  createGeminiTooltip(button, {
+    content: label,
+    owner: 'top-bar-action',
+    placement: 'bottom',
+  })
+}
+
+function destroyEntryTooltip(entry: Element, buttonSelector: string): void {
+  destroyGeminiTooltip(entry.querySelector<HTMLElement>(buttonSelector))
 }
 
 function isEntryNode(node: Node): boolean {
@@ -366,10 +383,16 @@ function ensureEntry(
     ? existingEntry
     : createEntry(kind)
 
-  if (existingEntry && existingEntry !== entry) existingEntry.remove()
+  if (existingEntry && existingEntry !== entry) {
+    destroyEntryTooltip(existingEntry, entrySelectors.button)
+    existingEntry.remove()
+  }
   document.querySelectorAll<HTMLElement>(entrySelectors.entry).forEach(
     (candidate) => {
-      if (candidate !== entry) candidate.remove()
+      if (candidate !== entry) {
+        destroyEntryTooltip(candidate, entrySelectors.button)
+        candidate.remove()
+      }
     },
   )
   decorateEntry(entry, kind)
@@ -401,6 +424,10 @@ function insertEntries(
 function reconcile(): void {
   if (!isStarted) return
 
+  destroyGeminiTooltipsWhere((reference, owner) => {
+    if (owner !== 'top-bar-action') return false
+    return !reference.isConnected || !reference.closest(ALL_ENTRY_SELECTOR)
+  })
   ensureObserverBindings()
   const rightSection = getRightSection()
   if (!rightSection) return
@@ -447,6 +474,9 @@ function stopObservers(): void {
 }
 
 function removeInjectedResources(): void {
+  destroyGeminiTooltipsWhere((_reference, owner) =>
+    owner === 'top-bar-action'
+  )
   document.querySelectorAll(ALL_ENTRY_SELECTOR)
     .forEach((entry) => entry.remove())
   document.getElementById(STYLE_ID)?.remove()
@@ -488,8 +518,10 @@ export function startTopBarAction(): void {
 export function stopTopBarAction(): void {
   if (!themeEnabled) return
   themeEnabled = false
-  document.querySelectorAll(THEME_ENTRY_SELECTOR)
-    .forEach((entry) => entry.remove())
+  document.querySelectorAll<HTMLElement>(THEME_ENTRY_SELECTOR).forEach((entry) => {
+    destroyEntryTooltip(entry, THEME_BUTTON_SELECTOR)
+    entry.remove()
+  })
   if (chatSettingsEnabled) reconcile()
   stopLifecycleIfUnused()
 }
@@ -503,8 +535,10 @@ export function startChatSettingsTopBarAction(): void {
 export function stopChatSettingsTopBarAction(): void {
   if (!chatSettingsEnabled) return
   chatSettingsEnabled = false
-  document.querySelectorAll(CHAT_SETTINGS_ENTRY_SELECTOR)
-    .forEach((entry) => entry.remove())
+  document.querySelectorAll<HTMLElement>(CHAT_SETTINGS_ENTRY_SELECTOR).forEach((entry) => {
+    destroyEntryTooltip(entry, CHAT_SETTINGS_TOP_BAR_BUTTON_SELECTOR)
+    entry.remove()
+  })
   eventBus.emitSync('chat-settings-panel:close', {
     source: 'shortcut-hidden',
   })

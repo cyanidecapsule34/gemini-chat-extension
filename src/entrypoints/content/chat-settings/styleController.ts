@@ -3,6 +3,10 @@ import {
   type ChatSettings,
   type ChatWidthMode,
 } from '@/services/chatSettings'
+import {
+  CHAT_SETTINGS_SCOPE_SELECTOR,
+  INPUT_AREA_V2_SELECTOR,
+} from './selectors'
 
 const STYLE_ID = 'gpk-chat-settings-style'
 const CHAT_WIDTH_ATTR = 'data-gpk-chat-width'
@@ -12,8 +16,6 @@ const USER_MESSAGE_FULL_WIDTH_ATTR = 'data-gpk-user-message-full-width'
 
 const CHAT_WIDTH_VAR = '--gpk-chat-width'
 const INPUT_WIDTH_VAR = '--gpk-input-width'
-const CHAT_SETTINGS_SCOPE_SELECTOR =
-  'chat-window:not(.preview-chat-window):not(.in-gems-mode)'
 
 const STYLE = `
 :root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container {
@@ -25,21 +27,51 @@ const STYLE = `
   max-width: 100% !important;
 }
 
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container model-response .response-container-header,
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container model-response message-content > .markdown > *,
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container model-response .response-container-footer {
+  max-width: 100% !important;
+}
+
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container model-response .response-container-footer message-actions {
+  margin: 0 !important;
+}
+
 :root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container table-block,
 :root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container .table-block {
   box-sizing: border-box !important;
   max-width: 100% !important;
+  padding: 0 !important;
+}
+
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container table-block .table-footer,
+:root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container .table-block .table-footer {
+  padding: 0 !important;
 }
 
 :root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container table-block .table-content,
 :root[${CHAT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} infinite-scroller > div.conversation-container .table-block .table-content {
   max-width: 100% !important;
   overflow-x: auto !important;
+  padding: 0 !important;
 }
 
+/* Legacy Gemini input-container structure: fieldset is a direct child. */
 :root[${INPUT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} input-container > fieldset {
   box-sizing: border-box !important;
   max-width: var(${INPUT_WIDTH_VAR}) !important;
+}
+
+/* Center Gemini's prompt surface within the available input area. */
+:root[${INPUT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} input-container > div.input-area-container {
+  max-width: 100% !important;
+  align-items: center !important;
+}
+
+/* Current Gemini input-area-v2 structure. */
+:root[${INPUT_WIDTH_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} ${INPUT_AREA_V2_SELECTOR} {
+  box-sizing: border-box !important;
+  width: min(var(${INPUT_WIDTH_VAR}), 100%) !important;
 }
 
 :root[${USER_MESSAGE_LEFT_ATTR}] ${CHAT_SETTINGS_SCOPE_SELECTOR} user-query-content {

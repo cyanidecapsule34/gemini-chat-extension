@@ -50,11 +50,6 @@
   "responseNotificationMessage": "Votre réponse est prête.",
   "bulkDelete": {
     "entryLabel": "Suppression groupée",
-    "entryHint": {
-      "title": "Suppression groupée",
-      "description": "Cliquez pour passer en mode multi-sélection. Sélectionnez les chats à supprimer, puis confirmez.",
-      "dismiss": "Fermer"
-    },
     "selectRecent": "Sélectionner les $1 dernières",
     "selectUnpinned": "Sélectionner les $1 derniers chats non épinglés",
     "change": "Modifier",
@@ -76,12 +71,33 @@
   },
   "quickFollow": {
     "more": "Plus",
-    "moreAriaLabel": "Afficher plus de prompts"
+    "moreAriaLabel": "Afficher plus de prompts",
+    "multiSelection": {
+      "selectedText": "Texte sélectionné",
+      "userComment": "Commentaire utilisateur",
+      "editComment": "Modifier le commentaire",
+      "commentPlaceholder": "Ajouter un commentaire…",
+      "add": "Ajouter",
+      "send": "Envoyer",
+      "addToDraft": "Ajouter au brouillon",
+      "sendSeparately": "Envoyer séparément",
+      "selectionNumber": "Sélection $1",
+      "addFailed": "Impossible d’ajouter cette sélection",
+      "maxSelections": "Vous pouvez ajouter jusqu’à 10 sélections",
+      "removeSelection": "Supprimer la sélection",
+      "updateFailed": "Impossible de modifier le brouillon",
+      "sendFailed": "Envoi impossible. Votre brouillon a été conservé.",
+      "sendUnknown": "L’envoi n’a pas pu être confirmé. Votre brouillon a été conservé.",
+      "restoreDraft": "Restaurer le brouillon",
+      "restoreFailed": "Impossible de restaurer le brouillon. Effacez le champ de saisie et réessayez.",
+      "unsupportedDraft": "Ce brouillon ne peut pas être mis de côté en toute sécurité. Envoyez ou supprimez d’abord les pièces jointes et le contenu mis en forme."
+    }
   },
   "settings": {
     "quickFollow": {
       "title": "Relance rapide",
       "enable": "Activer la Relance rapide",
+      "enableDescription": "Lorsque la relance rapide est activée, le bouton « Demander » de Gemini est masqué. Désactivez-la pour l’afficher à nouveau.",
       "customPrompts": {
         "title": "Gestion des compétences",
         "description": "Les $1 premières compétences sont épinglées, faites défiler horizontalement pour en voir plus",
@@ -181,7 +197,15 @@
       "enableBackgroundImage": "Activer le fond d'écran",
       "backgroundImageUpload": "Téléchargement de l'image de fond",
       "dropBackground": "Déposez votre image ici",
-      "fileTypes": "PNG, JPG ou WebP jusqu'à 5 Mo",
+      "themeBloom": {
+        "title": "Theme Bloom",
+        "description": "Déposez une image en dehors du champ de prompt pour appliquer un thème assorti ; dans le champ, elle se téléverse normalement.",
+        "analyzing": "Association du thème en cours…",
+        "dropHint": "Déposez pour appliquer le thème",
+        "applyImageFailed": "Impossible d'appliquer l'image"
+      },
+      "interactions": "Interactions",
+      "fileTypes": "PNG, JPG, WebP et AVIF jusqu'à 10 Mo",
       "selectFile": "Sélectionner un fichier",
       "blurIntensity": "Flou",
       "backgroundPosition": "Position",
@@ -212,8 +236,9 @@
       "chatTextColor": "Couleur du texte des messages",
       "chatTextColorModeDescription": "Mode : $1",
       "resetChatTextColor": "Réinitialiser",
-      "invalidFileType": "Seuls les formats PNG/JPG/WebP sont pris en charge",
-      "fileTooLarge": "La taille de l'image doit être de 5 Mo ou moins",
+      "invalidFileType": "Seuls les formats PNG, JPG, WebP et AVIF sont pris en charge",
+      "fileTooLarge": "La taille de l'image doit être de 10 Mo ou moins",
+      "imageTooLarge": "Les dimensions de l'image ne doivent pas dépasser 40 MP",
       "imageLoadFailed": "Échec du chargement de l'image, veuillez réessayer",
       "removeBackgroundImage": "Supprimer l'image de fond"
     },
@@ -474,6 +499,8 @@
         "toggleBulkDelete": "Basculer la suppression groupée",
         "toggleBulkDeleteDisabledInfo": "La suppression groupée est désactivée. Activez-la dans les paramètres pour utiliser ce raccourci.",
         "openNewChat": "Ouvrir un nouveau chat",
+        "deleteCurrentChat": "Supprimer le chat actuel",
+        "deleteCurrentChatInfo": "Ce raccourci ouvre la confirmation de suppression. Appuyez sur Entrée pour confirmer la suppression du chat actuel.",
         "openTemporaryChat": "Ouvrir le chat temporaire",
         "openLibrary": "Ouvrir la bibliothèque",
         "openGems": "Ouvrir Gems",
@@ -553,15 +580,40 @@
   "whatsnew": {
     "title": "Quoi de neuf",
     "releaseNotes": "Notes de version",
-    "chatLayout": {
-      "title": "Gemini suit votre rythme",
-      "description": "Ajustez la largeur du chat et du champ de saisie pour rendre les conversations Gemini plus confortables, plus ciblées et plus faciles à suivre.",
-      "action": "Ajuster la mise en page"
-    },
-    "gemAvatar": {
-      "title": "Donnez un visage à chaque Gem",
-      "description": "Attribuez un avatar à chaque Gem pour transformer un simple nom en personnage visible avec sa propre personnalité.",
-      "action": "Ouvrir les améliorations"
+    "multiAsk": {
+      "title": "Multi-Ask pour Gemini est arrivé",
+      "description": "Continuez à lire sans retenir vos questions. Notez-les au fil de la lecture, puis posez-les ensemble avec le bon contexte.",
+      "action": "Voir le guide"
     }
+  },
+  "onboarding": {
+    "width": {
+      "title": "Lisez plus facilement les longues réponses",
+      "description": "Ajustez la largeur de la conversation pour donner plus de place aux longs textes et au code."
+    },
+    "theme": {
+      "title": "Faites de Gemini votre espace",
+      "description": "Choisissez des couleurs et un arrière-plan adaptés à votre espace de travail."
+    },
+    "bulkDelete": {
+      "title": "Triez vos discussions plus vite",
+      "description": "Sélectionnez plusieurs conversations inutiles et gagnez du temps en les supprimant."
+    },
+    "settings": {
+      "title": "Plus d’outils au même endroit",
+      "description": "Ouvrez Gemini Power Kit à tout moment pour trouver les outils et réglages dont vous avez besoin."
+    },
+    "finish": {
+      "title": "Tout est prêt !",
+      "description": "Adaptez Gemini à vos besoins. Découvrez quelques conseils ou demandez de l’aide dès que nécessaire.",
+      "guideDescription": "Des conseils pratiques pour bien démarrer.",
+      "supportDescription": "De l’aide dès que vous en avez besoin."
+    },
+    "next": "Suivant",
+    "skip": "Passer",
+    "guide": "Voir le guide",
+    "support": "Aide et assistance",
+    "done": "C’est parti",
+    "progress": "$1 sur $2"
   }
 }

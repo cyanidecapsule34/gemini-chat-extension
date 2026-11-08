@@ -50,11 +50,6 @@
   "responseNotificationMessage": "Sua resposta está pronta.",
   "bulkDelete": {
     "entryLabel": "Exclusão em lote",
-    "entryHint": {
-      "title": "Exclusão em massa",
-      "description": "Toque para entrar no modo de seleção múltipla. Selecione os chats que deseja excluir e confirme.",
-      "dismiss": "Fechar"
-    },
     "selectRecent": "Selecionar as últimas $1",
     "selectUnpinned": "Selecionar as últimas $1 não fixadas",
     "change": "Alterar",
@@ -76,12 +71,33 @@
   },
   "quickFollow": {
     "more": "Mais",
-    "moreAriaLabel": "Mostrar mais prompts"
+    "moreAriaLabel": "Mostrar mais prompts",
+    "multiSelection": {
+      "selectedText": "Texto selecionado",
+      "userComment": "Comentário do usuário",
+      "editComment": "Editar comentário",
+      "commentPlaceholder": "Adicionar um comentário…",
+      "add": "Adicionar",
+      "send": "Enviar",
+      "addToDraft": "Adicionar ao rascunho",
+      "sendSeparately": "Enviar separadamente",
+      "selectionNumber": "Seleção $1",
+      "addFailed": "Não foi possível adicionar esta seleção",
+      "maxSelections": "Você pode adicionar até 10 seleções",
+      "removeSelection": "Remover seleção",
+      "updateFailed": "Não foi possível atualizar o rascunho",
+      "sendFailed": "Não foi possível enviar. O rascunho foi mantido.",
+      "sendUnknown": "Não foi possível confirmar o envio. O rascunho foi mantido.",
+      "restoreDraft": "Restaurar rascunho",
+      "restoreFailed": "Não foi possível restaurar o rascunho. Limpe o campo de entrada e tente novamente.",
+      "unsupportedDraft": "Este rascunho não pode ser guardado com segurança. Envie ou remova os anexos e o conteúdo formatado primeiro."
+    }
   },
   "settings": {
     "quickFollow": {
       "title": "Seguimento rápido",
       "enable": "Ativar Seguimento rápido",
+      "enableDescription": "Quando o Seguimento rápido está ativado, o botão Perguntar integrado do Gemini fica oculto. Desative-o para exibir o botão novamente.",
       "customPrompts": {
         "title": "Gestão de habilidades",
         "description": "As primeiras $1 habilidades estão fixadas, role horizontalmente para ver mais",
@@ -181,7 +197,15 @@
       "enableBackgroundImage": "Habilitar papel de parede",
       "backgroundImageUpload": "Upload de imagem de fundo",
       "dropBackground": "Solte sua imagem aqui",
-      "fileTypes": "PNG, JPG ou WebP até 5MB",
+      "themeBloom": {
+        "title": "Theme Bloom",
+        "description": "Solte uma imagem fora da caixa de prompt para aplicar um tema correspondente; dentro dela, o envio é normal.",
+        "analyzing": "Correspondendo seu tema…",
+        "dropHint": "Solte para aplicar o tema",
+        "applyImageFailed": "Não foi possível aplicar a imagem"
+      },
+      "interactions": "Interações",
+      "fileTypes": "PNG, JPG, WebP e AVIF até 10MB",
       "selectFile": "Selecionar arquivo",
       "blurIntensity": "Desfoque",
       "backgroundPosition": "Posição",
@@ -212,8 +236,9 @@
       "chatTextColor": "Cor do texto da mensagem",
       "chatTextColorModeDescription": "Modo: $1",
       "resetChatTextColor": "Redefinir",
-      "invalidFileType": "Apenas PNG/JPG/WebP são suportados",
-      "fileTooLarge": "O tamanho da imagem deve ser de 5MB ou menos",
+      "invalidFileType": "Apenas PNG, JPG, WebP e AVIF são suportados",
+      "fileTooLarge": "O tamanho da imagem deve ser de 10MB ou menos",
+      "imageTooLarge": "As dimensões da imagem não podem exceder 40 MP",
       "imageLoadFailed": "Falha ao carregar a imagem, tente novamente",
       "removeBackgroundImage": "Remover imagem de fundo"
     },
@@ -474,6 +499,8 @@
         "toggleBulkDelete": "Alternar exclusão em lote",
         "toggleBulkDeleteDisabledInfo": "A exclusão em lote está desativada. Ative-a em Configurações para usar este atalho.",
         "openNewChat": "Abrir novo chat",
+        "deleteCurrentChat": "Excluir chat atual",
+        "deleteCurrentChatInfo": "Este atalho abre a confirmação de exclusão. Pressione Enter para confirmar a exclusão do chat atual.",
         "openTemporaryChat": "Abrir chat temporário",
         "openLibrary": "Abrir biblioteca",
         "openGems": "Abrir Gems",
@@ -553,15 +580,40 @@
   "whatsnew": {
     "title": "O que há de novo",
     "releaseNotes": "Notas da versão",
-    "chatLayout": {
-      "title": "Gemini no seu ritmo",
-      "description": "Ajuste a largura do chat e da caixa de entrada para tornar as conversas com o Gemini mais confortáveis, focadas e fáceis de acompanhar.",
-      "action": "Ajustar layout do chat"
-    },
-    "gemAvatar": {
-      "title": "Dê um rosto para cada Gem",
-      "description": "Defina um avatar para cada Gem e transforme um nome em um personagem visível com personalidade própria.",
-      "action": "Abrir melhorias"
+    "multiAsk": {
+      "title": "Chegou o Multi-Ask para Gemini",
+      "description": "Continue lendo sem precisar guardar as perguntas na memória. Anote-as durante a leitura e pergunte tudo junto com o contexto certo.",
+      "action": "Ver guia de uso"
     }
+  },
+  "onboarding": {
+    "width": {
+      "title": "Leia respostas longas com mais facilidade",
+      "description": "Ajuste a largura da conversa para dar mais espaço a textos longos e códigos."
+    },
+    "theme": {
+      "title": "Deixe o Gemini com a sua cara",
+      "description": "Escolha cores e um plano de fundo que combinem com seu espaço de trabalho."
+    },
+    "bulkDelete": {
+      "title": "Organize conversas mais rápido",
+      "description": "Selecione várias conversas que não precisa mais e economize tempo ao excluí-las."
+    },
+    "settings": {
+      "title": "Mais ferramentas em um só lugar",
+      "description": "Abra o Gemini Power Kit quando quiser para encontrar as ferramentas e configurações de que precisa."
+    },
+    "finish": {
+      "title": "Tudo pronto!",
+      "description": "Use o Gemini do seu jeito. Confira algumas dicas ou peça ajuda sempre que precisar.",
+      "guideDescription": "Dicas práticas para começar.",
+      "supportDescription": "Ajuda sempre que você precisar."
+    },
+    "next": "Avançar",
+    "skip": "Pular",
+    "guide": "Ver guia",
+    "support": "Ajuda e suporte",
+    "done": "Vamos lá",
+    "progress": "$1 de $2"
   }
 }

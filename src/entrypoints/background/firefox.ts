@@ -1,5 +1,5 @@
 import { browser } from 'wxt/browser'
-import { isStuffMediaSourcePath, parseMediaResponse } from '@/utils/stuffMediaParser'
+import { isStuffMediaRequestUrl, parseMediaResponse } from '@/utils/stuffMediaParser'
 import {
   FIREFOX_GET_INSTANCE_ID_MESSAGE,
   OPEN_IN_NEW_TAB_MESSAGE,
@@ -11,6 +11,10 @@ import {
 let hasStarted = false
 const firefoxInstanceId = globalThis.crypto?.randomUUID?.()
   ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`
+
+const MEDIA_REQUEST_URLS = [
+  '*://gemini.google.com/_/BardChatUi/data/batchexecute*',
+]
 
 type OnBeforeRequestListener = Parameters<typeof browser.webRequest.onBeforeRequest.addListener>[0]
 type OnBeforeRequestDetails = Parameters<OnBeforeRequestListener>[0]
@@ -29,14 +33,7 @@ type StreamFilter = {
 }
 
 function shouldTrackByUrl(url: string): boolean {
-  try {
-    const urlObj = new URL(url)
-    return urlObj.pathname === '/_/BardChatUi/data/batchexecute'
-      && urlObj.searchParams.get('rpcids') === 'jGArJ'
-      && isStuffMediaSourcePath(urlObj.searchParams.get('source-path'))
-  } catch {
-    return false
-  }
+  return isStuffMediaRequestUrl(url)
 }
 
 function createRequestMonitor() {
@@ -64,7 +61,8 @@ function createRequestMonitor() {
       fromCache: details.fromCache,
       timeStamp: details.timeStamp,
     })
-  }, { urls: ['*://gemini.google.com/_/BardChatUi/data/batchexecute*'] })
+    trackedRequestIds.delete(details.requestId)
+  }, { urls: MEDIA_REQUEST_URLS })
 
   browser.webRequest.onErrorOccurred.addListener((details) => {
     if (!trackedRequestIds.has(details.requestId)) return
@@ -75,7 +73,7 @@ function createRequestMonitor() {
       timeStamp: details.timeStamp,
     })
     trackedRequestIds.delete(details.requestId)
-  }, { urls: ['*://gemini.google.com/_/BardChatUi/data/batchexecute*'] })
+  }, { urls: MEDIA_REQUEST_URLS })
 
   const onBeforeRequest = (details: OnBeforeRequestDetails): OnBeforeRequestResult => {
     if (details.method && details.method.toUpperCase() !== 'POST') {
@@ -90,6 +88,11 @@ function createRequestMonitor() {
       return undefined
     }
 
+    while (trackedRequestIds.size >= 256) {
+      const oldestId = trackedRequestIds.keys().next().value
+      if (oldestId === undefined) break
+      trackedRequestIds.delete(oldestId)
+    }
     trackedRequestIds.set(details.requestId, {
       url: details.url,
       tabId: details.tabId!,
@@ -124,6 +127,11 @@ function createRequestMonitor() {
         trackedBy: 'headers-fallback',
         timeStamp: details.timeStamp,
       }
+      while (trackedRequestIds.size >= 256) {
+        const oldestId = trackedRequestIds.keys().next().value
+        if (oldestId === undefined) break
+        trackedRequestIds.delete(oldestId)
+      }
       trackedRequestIds.set(details.requestId, tracked)
       console.log('[FirefoxBackground] request tracked by headers fallback', {
         requestId: details.requestId,
@@ -133,6 +141,7 @@ function createRequestMonitor() {
     }
     if (!webRequestApi.filterResponseData) {
       console.warn('[FirefoxBackground] filterResponseData is unavailable in current runtime')
+      trackedRequestIds.delete(details.requestId)
       return undefined
     }
 
@@ -141,6 +150,7 @@ function createRequestMonitor() {
       filter = webRequestApi.filterResponseData(details.requestId)
     } catch (error) {
       console.warn('[FirefoxBackground] filterResponseData failed:', error)
+      trackedRequestIds.delete(details.requestId)
       return undefined
     }
 
@@ -265,14 +275,14 @@ export function startFirefoxBackground(): void {
   browser.webRequest.onBeforeRequest.addListener(
     onBeforeRequest,
     {
-      urls: ['*://gemini.google.com/_/BardChatUi/data/batchexecute*'],
+      urls: MEDIA_REQUEST_URLS,
     },
     ['requestBody'],
   )
   browser.webRequest.onHeadersReceived.addListener(
     onHeadersReceived,
     {
-      urls: ['*://gemini.google.com/_/BardChatUi/data/batchexecute*'],
+      urls: MEDIA_REQUEST_URLS,
     },
     ['blocking'],
   )
